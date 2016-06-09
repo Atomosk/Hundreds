@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>c1e068a7-3c73-4a41-9f82-392beb57f639</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>HundredsGpu</RootNamespace>
+    <AssemblyName>HundredsGpu</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
+    <Name>HundredsGpu</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <Tailcalls>false</Tailcalls>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Debug\HundredsGpu.XML</DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <Tailcalls>true</Tailcalls>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Release\HundredsGpu.XML</DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '11.0'">
+      <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')">
+        <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets</FSharpTargetsPath>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets')">
+        <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  <Import Project="$(FSharpTargetsPath)" />
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Program.fs" />
+    <None Include="App.config" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FSCL.Compiler">
+      <HintPath>..\packages\FSCL.Compiler.2.0.1\lib\net45\FSCL.Compiler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Compiler.Core">
+      <HintPath>..\packages\FSCL.Compiler.2.0.1\lib\net45\FSCL.Compiler.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Compiler.Language">
+      <HintPath>..\packages\FSCL.Compiler.2.0.1\lib\net45\FSCL.Compiler.Language.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Compiler.NativeComponents">
+      <HintPath>..\packages\FSCL.Compiler.2.0.1\lib\net45\FSCL.Compiler.NativeComponents.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Compiler.Util">
+      <HintPath>..\packages\FSCL.Compiler.2.0.1\lib\net45\FSCL.Compiler.Util.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Runtime">
+      <HintPath>..\packages\FSCL.Runtime.2.0.1\lib\net451\FSCL.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Runtime.CompilerSteps">
+      <HintPath>..\packages\FSCL.Runtime.2.0.1\lib\net451\FSCL.Runtime.CompilerSteps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Runtime.Core">
+      <HintPath>..\packages\FSCL.Runtime.2.0.1\lib\net451\FSCL.Runtime.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Runtime.Execution">
+      <HintPath>..\packages\FSCL.Runtime.2.0.1\lib\net451\FSCL.Runtime.Execution.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Runtime.Language">
+      <HintPath>..\packages\FSCL.Runtime.2.0.1\lib\net451\FSCL.Runtime.Language.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSCL.Runtime.Scheduling">
+      <HintPath>..\packages\FSCL.Runtime.2.0.1\lib\net451\FSCL.Runtime.Scheduling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenCLManagedWrapper">
+      <HintPath>..\packages\FSCL.Runtime.2.0.1\lib\net451\OpenCLManagedWrapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+  </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
