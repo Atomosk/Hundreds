@@ -81,7 +81,7 @@ let main argv =
     let mutable currentProgress = 0
     use streamWriter = new System.IO.StreamWriter("out", false)
     let testExpression (expr : Expr<int[] -> bool>, format : unit -> string) : unit =
-        printf "Progress: \r%d/%d          " currentProgress totalProgress
+        printf "\rProgress: %d/%d          " currentProgress totalProgress
         currentProgress <- currentProgress + 1
 
         let hundreds = <@ Array.filter(%expr) input @>.Run()
