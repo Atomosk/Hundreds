@@ -7,6 +7,8 @@ open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.ExprShape
 open Microsoft.FSharp.Quotations.Patterns
 open Microsoft.FSharp.Quotations.DerivedPatterns
+open System
+open System.Linq
 
 [<EntryPoint>]
 let main argv = 
@@ -78,23 +80,26 @@ let main argv =
     printfn "Generated expressions: %d ms." sw.ElapsedMilliseconds
 
     let totalProgress = expressionInfos.Length;
-    let mutable currentProgress = 0
+    let currentProgress = ref 0
+    let monitor = obj ()
     use streamWriter = new System.IO.StreamWriter("out", false)
     let testExpression (expr : Expr<int[] -> bool>, format : unit -> string) : unit =
-        printf "\rProgress: %d/%d          " currentProgress totalProgress
-        currentProgress <- currentProgress + 1
+        lock monitor <| fun() ->
+            currentProgress := currentProgress.Value + 1
+            printf "\rProgress: %d/%d          " currentProgress.Value totalProgress
 
         let hundreds = <@ Array.filter(%expr) input @>.Run()
         if hundreds.Length > 0 then
             let sFormat = format()
-            hundreds
-            |> Array.iter (fun xs ->
+            let strings = Array.map (fun xs ->
                 let formatParams = Array.map box xs
-                let result = System.String.Format(sFormat, formatParams)
-                streamWriter.WriteLine(result)) 
+                System.String.Format(sFormat, formatParams)) hundreds
+            let chunk = String.Join(Environment.NewLine, strings)
+            lock monitor <| fun() -> streamWriter.WriteLine(chunk)
         else ()
 
-    Array.iter testExpression expressionInfos
+    ParallelEnumerable.AsParallel expressionInfos
+    |> fun s -> ParallelEnumerable.ForAll (s, Action<_>(testExpression))
     sw.Stop()
     printfn ""
     printfn "Total time: %d ms." sw.ElapsedMilliseconds;
