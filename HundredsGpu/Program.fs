@@ -23,15 +23,15 @@ let main argv =
         |> List.filter (fun y -> y <> x) 
         |> generateInput 
         |> List.map (fun y -> x::y)
-    let input = generateInput [1; 2; 3; 4; 5; 6; 7; 8; 9] |> List.map (fun x -> List.toArray x) |> List.toArray
+    let input = generateInput [1; 2; 3; 4; 5; 6; 7; 8; 9] |> List.map List.toArray |> List.toArray
     printfn "Generated inputs in: %d ms." sw.ElapsedMilliseconds
 
     //generating all possible combinations of 0-3.
     let rec generateExpressions indexes totalAmount = function
-    | n when n = totalAmount -> List.map (fun x -> x) indexes |> List.chunkBySize 1
+    | n when n = totalAmount -> indexes |> List.chunkBySize 1
     | n -> generateExpressions indexes totalAmount (n + 1)
            |> List.collect (fun os -> List.map (fun o -> o::os) indexes)
-    let operations = generateExpressions [0..3] 8 1 |> List.map (fun o -> List.toArray o) |> List.toArray
+    let operations = generateExpressions [0..3] 8 1 |> List.map List.toArray |> List.toArray
 
     //function to convert combination of 0-3 to string format for final expression.
     let operationString = [|"+"; "-"; "*"; ""|]
